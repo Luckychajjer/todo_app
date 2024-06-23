@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    /* scroll-behavior: smooth; */
+}
+body{
+    font-family: "Roboto",sans-serif;
+    display: flex;
+    flex-flow:column nowrap;
+    min-height:100vh;
+}
+header,footer{
+    padding: 2rem 7rem;
+    background-color: #1f2937;
+    color: #e5e7eb;
+    text-align: center;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+}
+nav a{
+    font-size: 18px;
+    color: #e5e7eb;
+    padding-left: 0.75rem;
+}
+a:any-link{
+    text-decoration: none;
+}
+main{
+    flex-grow:1 ;
+    display: grid;
+    grid-template-columns: 1;
+}
+main section{
+    height:60vh;
+    place-content: center;
+    padding:2.5rem 7rem;
+}
+
+.top-content{
+    display: flex;
+    color:whitesmoke;
+    background-color: #1f2937;
+    font-size:18px;
+}
+.content{
+    flex:1;
+    display: grid;
+    place-content: center;
+}
+.content .heading{
+    font-size: 48px;
+    font-weight: bolder;
+}
+button{
+    background-color: #3882f6;
+    width:80px;
+    padding: 0.4em;
+    border: none;
+    border-radius: 6px;
+    font: inherit;
+    color: inherit;
+    font-weight: 500;
+}
+.mainimg{
+    flex:1;
+    background-color: rgba(128, 128, 128, 0.379);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.random-box{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    font-size: 2rem;
+}
+
+.img-block{
+    padding: 2rem;
+    display: flex;
+    width:60%;
+    column-gap: 2.5rem;
+}
+.imgbox{
+    border-radius: 14px;
+    border: 4px solid #3882f6;
+    height: 5em;
+    margin-bottom: 0.4rem;
+}
+.box-forinfo p{
+    font-size: 1rem;
+    text-align:center;
+}
+.quote-box{
+    background-color: #e5e7eb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.quote{
+    position: relative;
+    font-size: 36px;
+    color:#1f2937;
+    width: 60%;
+    font-weight: 300;
+}
+.quote p:last-child{
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: absolute;
+    bottom: -1rem;
+    right: 1rem;
+}
+
+.signup-box{
+    padding: 0 7rem;
+}
+.sign button{
+    border: 3px solid #e5e7eb;
+    width: 15rem;
+}
+.sign button:active{
+    background-color: green;
+}
+.sign{
+    color: #e5e7eb;
+    background-color: #3882f6;
+    padding: 4rem 8rem ;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size:2rem;
+    font-weight: 700;
+}
+.sign p:last-child{
+    font-weight: 300;
+    font-size: 18px;
+}
+
