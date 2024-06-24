@@ -64,6 +64,5 @@ let humanChoice="";
 inputArr.forEach((a)=>{
   a.addEventListener("click",()=>{
     humanChoice = a.classList.value;});
-    // a.style.backgroundColor = "blue";
 });
 
