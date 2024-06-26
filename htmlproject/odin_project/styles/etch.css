@@ -34,10 +34,10 @@ h1{
     top:10%;
     left:33%;
 }
-.rows:first-child {
+.rows:first-child .sqr{
     border-top: 3px solid black;
 }
-.rows:last-child{
+.rows:last-child .sqr{
     border-bottom: 3px solid black;
 }
 .rows .sqr:first-child{
