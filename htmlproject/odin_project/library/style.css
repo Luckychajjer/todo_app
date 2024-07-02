@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    padding: 2rem;
+}
+input{
+    display: block;
+    margin: 4px;
+}
+#read,#notread{
+    display: inline-block;
+}
+main{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.8em;
+    padding: 1rem;
+}
+article{
+    min-width: 200px;
+    max-width:200px;
+    padding: 0.8rem;
+    border: 2px solid #726666;
+}
+article img{
+    min-height: 160px;  
+    min-width: 160px;  
+    max-width: 160px;
+    border: 2px solid #726666;
+}
+form{
+    padding: 2rem;
+}
+
+#extra{
+    color: red;
+    text-transform: capitalize;
+    font-size: 1.2rem;
+}
+button{
+    border: 2px solid rgba(28,110,164,0.6);
+    border-radius: 6px;
+    padding:4px;
+    margin:4px;
+}
+.btn-bg{
+    background-color: #379637;
+    color:rgb(254, 254, 254);
+}
+
+dialog{
+    position: absolute;
+    top:25%;
+    left:45%;
+}
