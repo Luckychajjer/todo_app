@@ -2,7 +2,6 @@
 let operatorValue="";
 let currOut = "";
 let a = 0;
-let ans="";
 
 const output = document.querySelector(".output");
 const numArr = document.querySelectorAll(".num").forEach(e=>e.addEventListener("click",()=>{inputvalue(e)}));

@@ -63,6 +63,7 @@ let inputArr = [rockInput,paperInput,scissorInput];
 let humanChoice="";
 inputArr.forEach((a)=>{
   a.addEventListener("click",()=>{
+    a.classList.toggle("act");
     humanChoice = a.classList.value;});
 });
 
