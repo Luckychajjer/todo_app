@@ -1,0 +1,47 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: grid;
+    grid-template-columns: 1fr 450px ;
+    place-content: center;
+    height: 100vh;
+    padding: 6rem;
+}
+.gameboard{
+    display: grid;
+    place-content: center;
+    grid-template:repeat(3,1fr)/repeat(3,1fr);
+    outline: 4px solid #ffffff;
+    outline-offset: -4px;
+}
+.gameboard div{
+    border: 4px solid orange;
+    width :150px;
+    height:150px;
+    display: grid;
+    place-content: center;
+    font-size: 4rem;
+}
+
+.playerInfo{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-flow :column nowrap;
+    gap:30px;
+    font-size: 2rem;
+}
+.playerInfo p{
+    padding:1rem;
+    border-radius: 2rem;
+}
+.currPlayer{
+    background-color: brown;
+    color: antiquewhite;
+}
+
+
+
