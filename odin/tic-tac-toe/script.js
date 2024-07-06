@@ -1,4 +1,4 @@
-function board(){
+function board(){ //this handles all board related function
     let gameBoard =[];
     let displayBoard=[];
     let row = 3;
@@ -42,7 +42,7 @@ function cell(){
     return{getValue,setValue};
 }
 
-function person(p1 = "player1",p2="player2"){
+function person(p1 = "Player1",p2="Player2"){ //this handles all players related
     const player1=document.querySelector(".player1")
     const player2 =document.querySelector(".player2")
     let players = [
@@ -50,12 +50,11 @@ function person(p1 = "player1",p2="player2"){
         {name:p2, token:"O",class:player2}
     ];
     let currPlayer = players[0];
-    // currPlayer.class.classList.toggle("currPlayer")
+    currPlayer.class.classList.toggle("currPlayer");
+
     const nextTurn = function(){
         currPlayer = currPlayer.name===players[0].name ? players[1] :players[0];   
-        // players[0].class.classList.toggle("currPlayer")
-        // players[1].class.classList.toggle("currPlayer")
-        // // console.log(currPlayer.name);
+        players.forEach(e=>e.class.classList.toggle("currPlayer"));
     }
 
     const getCurrPlayer = function(){
@@ -66,23 +65,27 @@ function person(p1 = "player1",p2="player2"){
 }
 
 
-function gameController(){
+function gameController(){ // this handles all game control  
     let startGame;
     let players;
     let ele1 = document.createElement("p");
     let ele2 = document.createElement("p");
-    ele1.classList.add("player1")
-    ele2.classList.add("player2")
+    let result = document.createElement("p");
+    ele1.classList.add("player1");
+    ele2.classList.add("player2");
+    ele1.textContent = "Player1 : X";
+    ele2.textContent = "Player2 : O";
     document.querySelector(".playerInfo").appendChild(ele1);
     document.querySelector(".playerInfo").appendChild(ele2);
-
+    document.querySelector(".playerInfo").appendChild(result);
     const start = function(){
         startGame = board();
-        p1name = p1.value == ""? "player1":p1.value;
-        p2name = p2.value == ""? "player2":p2.value;
+        p1name = p1.value == ""? "Player1":p1.value;
+        p2name = p2.value == ""? "Player2":p2.value;
         players = person(p1name,p2name);
         ele1.textContent = `${p1name} : X `;
         ele2.textContent = `${p2name} : O `;
+        result.textContent="";  
     }
     
     const move = function(pos,currDiv){
@@ -90,38 +93,36 @@ function gameController(){
         let x = Math.floor(pos/3);
         let y = pos%3;
         if(currDiv.textContent!=""){
-            // console.log("can't play here");
+            return;
         }
         else{
             currBoard[x][y].setValue(players.getCurrPlayer().token);
             if(players.getCurrPlayer().token == "X"){
-                currDiv.style.color = "red" ;
+                currDiv.style.color = "#E90137" ;
             }
             else{
-                currDiv.style.color = "blue" ;
+                currDiv.style.color = "#076ADC" ;
             }
             currDiv.textContent = players.getCurrPlayer().token;
-            // startGame.printBoard();
             completedGame();
-            players.nextTurn();
         }
     }
 
     const completedGame = function(){
         let [gameComplete,desicion] = checkWin();
-        // console.log(gameComplete,desicion)
         if(gameComplete){
-            console.log(`🎉 Winner ${players.getCurrPlayer().name} 🎉`);
-            console.log("game over");    
-            
+            resultLine.classList.add("resultline");
+            result.textContent = `🎉 Winner ${players.getCurrPlayer().name} 🎉`;    
         }
         else if(desicion){
-            // console.log(`Its a Tie`);
+            result.textContent = `Tie`;
         }
         else{
+            players.nextTurn();
             return;
         }
-        dia.showModal();
+        players.getCurrPlayer().class.classList.toggle("currPlayer");
+        dia.showModal()
     }
 
     const checkWin = function(){
@@ -132,18 +133,22 @@ function gameController(){
         for(let i=0;i<3;i++){
             if((currBoard[i][0]!=0)&&(currBoard[i][0]==currBoard[i][1]) && (currBoard[i][1]==currBoard[i][2])){
                 gameComplete = true;
+                resultLine.style.transform = `translate(0,${87+162*i}px) scale(0.9)`;
                 break;
             }
             if((currBoard[0][i]!=0)&&(currBoard[0][i]==currBoard[1][i]) && (currBoard[1][i]==currBoard[2][i])){
                 gameComplete = true;
+                resultLine.style.transform = `translate(${-162 + 162*i}px,250px) rotate(90deg) scale(0.9)`;
                 break;
             }
         }
         if((currBoard[1][1]!=0)&&(currBoard[0][0]==currBoard[1][1]) && (currBoard[1][1]==currBoard[2][2])){
             gameComplete = true;
+            resultLine.style.transform = "translate(0,250px) rotate(45deg) scale(1.2)";
         }
         if((currBoard[1][1]!=0)&&(currBoard[0][2]==currBoard[1][1]) && (currBoard[1][1]==currBoard[2][0])){
             gameComplete = true;
+            resultLine.style.transform = "translate(0,250px) rotate(-45deg) scale(1.2)";
         }
 
         for(let i =0;i<3;i++){
@@ -161,6 +166,9 @@ function gameController(){
 }
 const game = gameController();
 
+const resultLine = document.querySelector("main div"); 
+const dia = document.querySelector("dialog");
+dia.showModal();
 const gameboard = document.querySelector(".gameboard");
 for(let i=0;i<9;i++){
     let currDiv = document.createElement("div");
@@ -168,10 +176,9 @@ for(let i=0;i<9;i++){
     gameboard.appendChild(currDiv);
 }
 
-const dia = document.querySelector("dialog");
-dia.showModal();
 document.querySelector(".restart").addEventListener("click",()=>{
     game.start();
+    resultLine.classList.remove("resultline");
     dia.close();
 })
 
