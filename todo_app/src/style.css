@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: "Jua", sans-serif;
+}
+aside{
+    position: fixed;
+    width: 400px;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background: #F2F2F2;
+    font-size: 38px;
+}
+.user div{
+    border-radius: 48px;
+    width: 48px;
+    height: 48px;
+    background: #cac9c9;
+    border: 4px solid #f32424f2;
+    outline-offset: 3px;
+}
+
+.user{
+    position: absolute;
+    top: 159px;
+    display: flex;
+    align-items: center;
+    padding: 0px 54px;
+    gap:16px;
+}
+
+.projectcont{
+    position: absolute;
+    height: 55px;
+    top: 250px;
+    padding: 0 54px;
+    width:100%;
+
+}
+.projectheading{
+    display: flex;
+    justify-content: space-between;
+}
+.projectheading p:last-child{
+    transform: scale(1.3);
+}
+.projectlist p,input{
+    font: inherit;
+    font-size: 24px;
+    margin: 4px;
+    border: none;
+}
+.projectlist p:hover{
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+.projectlist p::before{
+    content: "#";
+    color: red;
+    padding:0 10px;
+}
+section{
+    position: absolute;
+    width:700px;
+    left: 450px;
+    top: 103px;
+}
+.edit{
+    position: absolute;
+    top:22px;
+    left:-1000px;
+    background-image: url("./images/editIcon.png");
+    width:32px;
+    height: 32px;
+    background-size: cover;
+}
+
+.heading{
+    font: inherit;
+    font-size: 50px;
+    cursor: pointer;
+    border: none;    
+}
+.heading:hover ~ .edit{
+    left:-42px;
+}
+.heading:focus-visible,.projectlist input:focus-visible{
+    background-color: #cac9c9;
+    padding: 0px 8px;
+    border-radius: 8px;
+    caret-color: #ff0000;
+    outline: none;
+}
+.headingContainer{
+    margin-bottom:12px;
+}
+.headingContainer,.todos{
+    border-bottom: 3px solid #00000033;
+}
+.todos{
+    display: flex;
+    padding:8px;
+    font-size: 24px;
+    align-items: center;
+}
+
+.check{
+    width: 47px;
+    height: 47px;
+    border-radius: 47px;
+    background: rgba(255, 0, 0, 0.3);
+    border: 3px solid #FF0000;
+    margin-right:10px;
+}
+
+.due{
+    font-size: 16px;
+    color:#10B510;
+}
+
+.addtask p{
+    cursor: pointer;
+    font-size: 22px;
+    color:#7D7C7C;
+    padding:10px 20px;
+    display: inline-block;
+}
+
+dialog{
+    position: absolute;
+    width: 500px;
+    height: 350px;
+    left: 35%;
+    top: 25%;
+    border-radius: 16px;
+}
+
+dialog::backdrop{
+    background: rgba(0, 0, 0, 0.4);
+}
+.container{
+    padding:28px;
+    height: 100%;
+    border-radius:12px;
+}
+
+#title,#description,#due{
+    font:inherit;
+    font-size: 20px;
+    width:100%;
+    margin-bottom:12px;
+    height:40px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    background-color: #cccccca6;
+}
+::placeholder{
+    color: rgba(0, 0, 0, 0.542);
+}
+
+#description{
+    height:134px;
+}
+#due{
+    height:36px;
+    width:180px;
+    border-radius: 6px;
+}
+textarea{
+    height: 135px;    
+}
+
+dialog button{
+    font:inherit;
+    font-size: 26px;
+    position: absolute;
+    right: 28px;
+    bottom:16px;
+    width: 129px;
+    height: 45px;
+    background: #78EE6E;
+    border-radius: 10px;
+    border-width: 3px;
+}
+
+.pricontainer{
+    position: absolute;
+    right:28px;
+    bottom:66px;
+    display: flex;
+    gap:6px;
+}
+
+.prioritycolor{
+    appearance: none;    
+    border-radius: 50%;
+    width:36px;
+    height: 36px;
+    border-radius: 36px;
+    border: 2px solid;
+    transition: 0.2s all linear;
+}
+.grey-pri{
+    background-color:  rgba(193, 193, 193, 0.4);
+    border-color: rgba(193, 193, 193, 1);
+}
+.red-pri{
+    background-color: rgba(255, 0, 0, 0.4);
+    border-color: rgba(255, 0, 0, 1);
+}
+
+.orange-pri{
+    background-color: rgba(255, 165, 0, 0.4);
+    border-color: rgba(255, 165, 0, 1);
+}
+
+.blue-pri{
+    background-color: rgba(0, 0, 255, 0.4);
+    border-color: rgba(0, 0,255, 1);
+}
+
+.prioritycolor:checked{
+    border: 6px solid black;
+}

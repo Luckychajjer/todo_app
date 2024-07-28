@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo app</title>
+</head>
+<body>
+    <aside>
+        <div class="user">
+            <div></div>
+            <p>User name</p>
+        </div>
+        <div class="projectcont">
+            <div class="projectheading">
+                <p>My Project</p>
+                <p>+</p>
+            </div>
+            <div class="projectlist">
+                <p>Prj1</p>
+                <p>Prj2</p>
+                <p>Prj3</p>
+            </div>
+        </div>
+    </aside>
+    <section>
+        <h1>Prj1</h1>
+        <div class="todocontainer">
+            <div class="todos">
+                <div class="check"></div>
+                <div>
+                    <p>todo1</p>
+                    <p class="due">24 Jul</p>
+                </div>
+            </div>
+            <div class="todos">
+                <div class="check"></div>
+                <div>
+                    <p>todo2</p>
+                    <p class="due">24 Jul</p>
+                </div>
+            </div>
+            <div class="todos">
+                <div class="check"></div>
+                <div>
+                    <p>todo3</p>
+                    <p class="due">24 Jul</p>
+                </div>
+            </div>
+            <div class="addtask">
+                <p>+ Add task</p>
+            </div>
+        </div>
+    </section>
+    <dialog>
+        <div class="container">
+            <input type="text" name="title" id="title" placeholder="Title">
+            <textarea name="description" id="description" placeholder="Description"></textarea>
+            <input type="date" name="due" id="due">
+            <div class="priority">
+                <div class="prioritycolor red-pri"></div>
+                <div class="prioritycolor orange-pri"></div>
+                <div class="prioritycolor blue-pri"></div>
+                <div class="prioritycolor grey-pri"></div>
+            </div>
+            <button type="submit" >Add</button>
+        </div>
+    </dialog>
+<script defer src="main.js"></script></body>
+</html>
