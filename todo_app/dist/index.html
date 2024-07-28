@@ -14,39 +14,18 @@
         <div class="projectcont">
             <div class="projectheading">
                 <p>My Project</p>
-                <p>+</p>
+                <p class="addProject">+</p>
             </div>
             <div class="projectlist">
-                <p>Prj1</p>
-                <p>Prj2</p>
-                <p>Prj3</p>
             </div>
         </div>
     </aside>
     <section>
-        <h1>Prj1</h1>
+        <div class="headingContainer">
+            <input class="heading" maxlength="18"></input>
+            <div class="edit"></div>
+        </div>
         <div class="todocontainer">
-            <div class="todos">
-                <div class="check"></div>
-                <div>
-                    <p>todo1</p>
-                    <p class="due">24 Jul</p>
-                </div>
-            </div>
-            <div class="todos">
-                <div class="check"></div>
-                <div>
-                    <p>todo2</p>
-                    <p class="due">24 Jul</p>
-                </div>
-            </div>
-            <div class="todos">
-                <div class="check"></div>
-                <div>
-                    <p>todo3</p>
-                    <p class="due">24 Jul</p>
-                </div>
-            </div>
             <div class="addtask">
                 <p>+ Add task</p>
             </div>
@@ -57,12 +36,13 @@
             <input type="text" name="title" id="title" placeholder="Title">
             <textarea name="description" id="description" placeholder="Description"></textarea>
             <input type="date" name="due" id="due">
-            <div class="priority">
-                <div class="prioritycolor red-pri"></div>
-                <div class="prioritycolor orange-pri"></div>
-                <div class="prioritycolor blue-pri"></div>
-                <div class="prioritycolor grey-pri"></div>
+            <div class="pricontainer">
+                <input type="radio" name="pri" id="red" class="prioritycolor red-pri" value="red-pri">
+                <input type="radio" name="pri" id="orange" class="prioritycolor orange-pri" value="orange-pri">
+                <input type="radio" name="pri" id="blue" class="prioritycolor blue-pri" value="blue-pri">
+                <input type="radio" name="pri" id="grey" class="prioritycolor grey-pri" value="grey-pri" checked>
             </div>
+            
             <button type="submit" >Add</button>
         </div>
     </dialog>
