@@ -172,8 +172,9 @@ heading.onclick =()=>{
         if(e.key =="Enter" || e.key=="Escape" ||e.key=="Tab"|| e.key == "Alt"){
          heading.blur();
          const currdata = JSON.parse(localStorage.getItem("user"));
-
-         currdata.projects.prj101.projectName = heading.value;
+         const prj = document.querySelector(".selected");
+         prj.textContent= heading.value;
+         currdata.projects[prj.id].projectName = heading.value;
          window.localStorage.setItem("user",JSON.stringify(currdata));
         }
      })
