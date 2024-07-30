@@ -13,8 +13,9 @@ aside{
     height: 100%;
     left: 0px;
     top: 0px;
-    background: #F2F2F2;
+    background: #262626;
     font-size: 38px;
+    color: whitesmoke;
 }
 .user div{
     border-radius: 48px;
@@ -51,24 +52,24 @@ aside{
 }
 .projectlist p,input{
     font: inherit;
-    font-size: 24px;
-    margin: 4px;
+    font-size: 28px;
+    margin: 6px;
     border: none;
 }
 .projectlist p:hover,.selected{
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(250, 33, 22, 0.6);
     border-radius: 10px;
 }
 .projectlist p::before{
     content: "#";
-    color: red;
+    color:#faa916;
     padding:0 10px;
 }
 section{
     position: absolute;
     width:700px;
     left: 450px;
-    top: 103px;
+    top: 50px;
 }
 .edit{
     position: absolute;
@@ -114,7 +115,7 @@ section{
     height: 47px;
     border-radius: 47px;
     background: rgba(255, 0, 0, 0.3);
-    border: 3px solid #FF0000;
+    border: 3px solid #ff0000;
     margin-right:10px;
 }
 
@@ -143,13 +144,21 @@ dialog{
 dialog::backdrop{
     background: rgba(0, 0, 0, 0.4);
 }
+#name{
+    width: 400px;
+    height: 200px;
+    padding: 30px;
+}
+#name p{
+    font-size: 2rem;
+}
 .container{
     padding:28px;
     height: 100%;
     border-radius:12px;
 }
 
-#title,#description,#due{
+#title,#description,#due,#userName{
     font:inherit;
     font-size: 20px;
     width:100%;

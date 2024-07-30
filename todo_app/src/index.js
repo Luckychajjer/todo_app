@@ -15,12 +15,15 @@ function resetData(){
         nextid:101,
         projects:{}
     };    
-    let name = prompt("Enter Name");
-    while(name ==null){
-        name = prompt("Enter Name");
+    const dialog = document.querySelector("#name");
+    const userName = document.querySelector("#userName");
+
+    if(userName.value.length>=1){
+        user.name = userName.value;
     }
-    user.name = name;
     localStorage.setItem("user",JSON.stringify(user));
+    dialog.close();
+    displayAll();
 }
 
 function delTodo(todoid){
@@ -32,7 +35,7 @@ function delTodo(todoid){
     window.localStorage.setItem("user",JSON.stringify(currdata));
 }
 function getInfo(){
-    const dialog = document.querySelector("dialog");
+    const dialog = document.querySelector("#task");
     let currdata = JSON.parse(localStorage.getItem("user"));
     let currinfo = {};
     const inputParameter = ['title','description','due'];
@@ -57,14 +60,14 @@ function getInfo(){
 
 }
 
-function displayTodo(todoid,todoList){
+function displayTodo(todoid,todo){
     const monthsArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const todos = document.createElement("div");
     todos.classList.add("todos");
 
     const check = document.createElement("div");
     check.classList.add("check");
-    check.classList.add(`${todoList.priority}`);
+    check.classList.add(`${todo.priority}`);
     check.id = todoid;
     check.onclick = ()=>{delTodo(check.id)};
 
@@ -73,11 +76,11 @@ function displayTodo(todoid,todoList){
 
     const title = document.createElement("p");
     title.classList.add("title");
-    title.textContent = todoList.title;
+    title.textContent = todo.title;
 
     const due = document.createElement("p");
     due.classList.add("due");
-    const dueDate = new Date(todoList.due);
+    const dueDate = new Date(todo.due);
     due.textContent = `${dueDate.getDate()} ${monthsArr[dueDate.getMonth()]}`;
 
     content.appendChild(title);
@@ -92,7 +95,7 @@ function displayTodo(todoid,todoList){
 }
 
 function displayAllHelper(newele,prjid){
-
+    console.log(newele,prjid);
     document.querySelector(".selected").classList.remove("selected");
     newele.classList.add("selected");
     const currdata = JSON.parse(localStorage.getItem("user"));
@@ -110,17 +113,6 @@ function displayAllHelper(newele,prjid){
     }
 }
 
-function displayPrj(projectName,prjid){
-    const projectlist = document.querySelector(".projectlist");
-    const newele = document.createElement("p");
-    newele.id = prjid;
-    newele.textContent = projectName;
-    newele.onclick = ()=>{displayAllHelper(newele,newele.id)}; 
-    projectlist.insertBefore(newele,projectlist.children[0]); 
-}
-
-
-
 function displayAll(){
     const currdata = JSON.parse(localStorage.getItem("user"));
     document.querySelector(".user p").textContent = currdata.name;
@@ -128,12 +120,39 @@ function displayAll(){
     for(const project in currProject){
         displayPrj(currProject[project].projectName,project);
     }
-    document.querySelector(".heading").value = currProject.prj101.projectName;
-    document.querySelector("#prj101").classList.add("selected");  //edit after
-    for(const todo in currProject.prj101.todoList){
-        displayTodo(todo,currProject.prj101.todoList[todo]);
-    }
 
+    displayTodoHelper(currProject);
+}
+
+function displayTodoHelper(currProject,prjid = "prj101"){
+    
+    if(currProject[prjid] == null){
+        document.querySelector("section").hidden = true;
+    }
+    else{
+        document.querySelector("section").hidden = false;
+
+        if(document.querySelector(".selected") == null){
+            document.querySelector(".heading").value = currProject[prjid].projectName;
+            document.querySelector(`#${prjid}`).classList.add("selected");  //edit after
+            for(const todo in currProject[prjid].todoList){
+                displayTodo(todo,currProject[prjid].todoList[todo]);
+            }
+        }
+        else{
+            const newele = document.querySelector(`#${prjid}`);
+            displayAllHelper(newele,newele.id); 
+        }
+    }
+}
+
+function displayPrj(projectName,prjid){
+    const projectlist = document.querySelector(".projectlist");
+    const newele = document.createElement("p");
+    newele.id = prjid;
+    newele.textContent = projectName;
+    newele.onclick = ()=>{displayAllHelper(newele,newele.id)}; 
+    projectlist.insertBefore(newele,projectlist.children[0]); 
 }
 
 function updateProject(projectName){
@@ -144,9 +163,10 @@ function updateProject(projectName){
         todoList:{}
     };
     currdata.projects[`prj${currdata.nextid}`] = newData;
-    displayPrj(projectName,`prj${currdata.nextid}`);
+    displayPrj(projectName,`prj${currdata.nextid}`,true);
     currdata.nextid++;
     window.localStorage.setItem("user",JSON.stringify(currdata));
+    displayTodoHelper(currdata.projects,`prj${currdata.nextid-1}`);
 }
 
 function newProject(){
@@ -180,20 +200,29 @@ heading.onclick =()=>{
      })
 }
 
+
 const addbtn = document.querySelector(".addtask p");
 addbtn.onclick=function(){
-    document.querySelector("dialog").showModal();
+    document.querySelector("#task").showModal();
     setDefDate();
 }
+const submit = document.querySelector("#task button");
+submit.onclick = getInfo;
 
 const addProject =document.querySelector(".addProject");
 addProject.onclick = newProject;
 
-const submit = document.querySelector("dialog button");
-submit.onclick = getInfo;
-
 if(!localStorage.getItem("user")){
-    resetData();
+    const userName = document.querySelector("#name")
+    userName.showModal();
+    userName.addEventListener("keydown",e=>{
+        if(e.key == "Enter"){
+            resetData();
+        }
+    });
+    document.querySelector("#name button").onclick = resetData;
 }
-displayAll();
+else{
+    displayAll();
+}
 
