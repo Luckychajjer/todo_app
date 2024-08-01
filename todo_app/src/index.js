@@ -1,4 +1,5 @@
 import './style.css';
+import favicon from './images/to-do-list.png'
 function setDefDate(){
     const dateinput = document.querySelector("#due");
     const date = new Date();
@@ -27,13 +28,18 @@ function resetData(){
 }
 
 function delTodo(todoid){
-    const currdata = JSON.parse(window.localStorage.getItem("user"));
+    const currdata = JSON.parse(window.localStorage.getItem("user"));   
     const currProject = document.querySelector(".selected").id;
-    const currTodo = document.querySelector(`#${todoid}`).parentNode;
+    const currTodo = document.querySelector(`#${todoid}`);
     delete currdata.projects[currProject].todoList[todoid];
-    currTodo.remove();
+    currTodo.classList.add("checkImage");
+    currTodo.parentNode.classList.add("fadeOut");
+    currTodo.parentNode.addEventListener("animationend",(a)=>{
+        currTodo.parentNode.remove();
+    });
     window.localStorage.setItem("user",JSON.stringify(currdata));
 }
+
 function getInfo(){
     const dialog = document.querySelector("#task");
     let currdata = JSON.parse(localStorage.getItem("user"));
@@ -64,6 +70,14 @@ function displayTodo(todoid,todo){
     const monthsArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const todos = document.createElement("div");
     todos.classList.add("todos");
+    todos.classList.add("fadeIn");
+
+    todos.addEventListener("animationend",(a)=>{
+        todos.classList.remove("fadeIn");
+    });
+
+    const todocontainer = document.querySelector(".todocontainer");
+    todocontainer.insertBefore(todos, todocontainer.children[0]);
 
     const check = document.createElement("div");
     check.classList.add("check");
@@ -79,7 +93,7 @@ function displayTodo(todoid,todo){
     title.textContent = todo.title;
 
     const due = document.createElement("p");
-    due.classList.add("due");
+    due.classList.add("dueDate");
     const dueDate = new Date(todo.due);
     due.textContent = `${dueDate.getDate()} ${monthsArr[dueDate.getMonth()]}`;
 
@@ -88,14 +102,9 @@ function displayTodo(todoid,todo){
 
     todos.appendChild(check);
     todos.appendChild(content);
-
-    const todocontainer = document.querySelector(".todocontainer");
-    todocontainer.insertBefore(todos, todocontainer.children[0]);
-
 }
 
 function displayAllHelper(newele,prjid){
-    console.log(newele,prjid);
     document.querySelector(".selected").classList.remove("selected");
     newele.classList.add("selected");
     const currdata = JSON.parse(localStorage.getItem("user"));
@@ -130,11 +139,14 @@ function displayTodoHelper(currProject,prjid = "prj101"){
         document.querySelector("section").hidden = true;
     }
     else{
+        if(document.querySelector(".starterInfo")){
+            document.querySelector(".starterInfo").remove();
+        }
         document.querySelector("section").hidden = false;
 
         if(document.querySelector(".selected") == null){
             document.querySelector(".heading").value = currProject[prjid].projectName;
-            document.querySelector(`#${prjid}`).classList.add("selected");  //edit after
+            document.querySelector(`#${prjid}`).classList.add("selected"); 
             for(const todo in currProject[prjid].todoList){
                 displayTodo(todo,currProject[prjid].todoList[todo]);
             }
@@ -225,4 +237,11 @@ if(!localStorage.getItem("user")){
 else{
     displayAll();
 }
+
+const link = document.createElement("link")
+link.href = favicon;
+link.rel="icon";
+document.querySelector("head").appendChild(link);
+
+
 
